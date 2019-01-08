@@ -11,6 +11,7 @@ sandbox: start-containers
 	curl -o tmp/insecure_key -fSL "https://github.com/phusion/baseimage-docker/raw/master/image/services/sshd/keys/insecure_key"
 	chmod 600 tmp/insecure_key
 	sed "s/ns1.*/ns1 ansible_ssh_host=$$(cat tmp/master-ip)/g" hosts | sed "s/ns2.*/ns2 ansible_ssh_host=$$(cat tmp/slave-ip)/g" > tmp/hosts-fixed
+	ansible-galaxy install -r requirements.yml --roles-path=roles --force
 	sudo ansible-playbook bind.yml -i tmp/hosts-fixed --private-key=tmp/insecure_key
 
 clean:

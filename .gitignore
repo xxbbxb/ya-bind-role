@@ -1,5 +1,6 @@
 .cache
 .idea
+sandbox/roles
 sandbox/tmp/*
 !sandbox/tmp/.keep
 *.retry
