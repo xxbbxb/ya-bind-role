@@ -1,0 +1,7 @@
+bind_dnssec_validation: false
+bind_allow_query: ["any"]
+bind_allow_recursion: ["none"]
+bind_zones: []
+bind_master_group: bind-master
+bind_slaves_group: bind-slaves
+bind_servers_group: bind

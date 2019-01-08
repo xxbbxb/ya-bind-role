@@ -1,0 +1,15 @@
+{% for bind_zone in bind_zones %}
+zone "{{ bind_zone.name }}" IN {
+	file "/var/lib/bind/{{ bind_zone.name }}.db";
+{% if bind_master_group in group_names %}
+	type master;
+	allow-transfer { {% for item in groups[bind_slaves_group] %}{{ hostvars[item]['ansible_default_ipv4']['address'] }};{% endfor %} };
+	allow-update { {% for item in groups[bind_slaves_group] %}{{ hostvars[item]['ansible_default_ipv4']['address'] }};{% endfor %} };
+	notify yes;
+{% else %}
+        type slave;
+        masters { {% for item in groups[bind_master_group] %}{{ hostvars[item]['ansible_default_ipv4']['address'] }};{% endfor %} };
+        allow-transfer {"none";};
+{% endif %}
+};
+{% endfor %}

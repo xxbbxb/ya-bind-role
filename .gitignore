@@ -1,0 +1,5 @@
+.cache
+.idea
+sandbox/tmp/*
+!sandbox/tmp/.keep
+*.retry

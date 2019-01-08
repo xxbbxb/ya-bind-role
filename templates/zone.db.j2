@@ -1,0 +1,15 @@
+$TTL 300
+{{ bind_zone.name }}. IN SOA {{ groups[bind_master_group][0] }}.{{ bind_zone.name }}. root.{{ bind_zone.name }}. (
+		{{ ansible_date_time.epoch }} ; serial
+		28800 ; refresh
+		7200 ; retry
+		1209600 ; expire
+		300 ; minimum 
+	)
+{% for item in groups[bind_servers_group] %}
+{{ bind_zone.name }}.	IN	NS	{{ item }}.{{ bind_zone.name }}.
+{{ item }}.{{ bind_zone.name }}.	IN	A	{{ hostvars[item]['ansible_default_ipv4']['address'] }}
+{% endfor %}
+{% for record in bind_zone.records %}
+{{ record }}
+{% endfor %}

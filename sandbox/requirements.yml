@@ -1,0 +1,3 @@
+- name: ya-bind-role
+  src: git@github.com:xxbbxb/ya-bind-role.git
+  scm: git

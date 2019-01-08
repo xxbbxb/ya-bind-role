@@ -1,0 +1,6 @@
+bind_zones:
+  - name: example.com
+    records: 
+      - 'www.example.com. IN A 184.168.221.54'
+      - 'ttt.example.com. IN A 184.168.221.54'
+      - 'zzz.example.com. IN A 184.168.221.54'

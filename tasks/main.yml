@@ -1,0 +1,33 @@
+- name: BIND installed
+  package:
+    name: bind9
+    state: present
+
+- name: named options configured
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: bind9 reload
+
+- name: named local configured
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: bind9 reload
+
+- name: copy zones to master
+  template:
+    src: zone.db.j2
+    dest: /var/lib/bind/{{ bind_zone.name }}.db
+  with_items: "{{ bind_zones }}"
+  loop_control:
+    loop_var: bind_zone
+  when: bind_master_group in group_names
+  notify: bind9 restart
+
+- name: BIND service is running
+  service:
+    name: bind9
+    state: started
+    enabled: yes
+  notify: bind9 reload
