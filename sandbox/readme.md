@@ -1,7 +1,7 @@
 
 ### How to use role
 
-Human friendly variable format See `group_vars/bind.yml`
+Human friendly variable format setup you zones at `group_vars/bind.yml`
 
 ```
 bind_zones:
@@ -15,7 +15,6 @@ bind_zones:
 master/slave configured using ansible groups, inventory file:
 
 ```
-
 [bind:children]
 bind-master
 bind-slaves
