@@ -1,4 +1,6 @@
-# Yet another ansible bind role
+# Yet another ansible BIND role
+
+Configures dns records
 
 ## Limitations
 
