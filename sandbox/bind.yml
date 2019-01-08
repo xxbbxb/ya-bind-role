@@ -1,4 +1,7 @@
 - hosts: bind
+  gather_facts: yes
+  
+- hosts: bind
   serial: 1
   roles:
     - ya-bind-role
